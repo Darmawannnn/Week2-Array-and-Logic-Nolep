@@ -4,25 +4,27 @@ fungsi ini akan me-return array 2 dimensi
 */
 function groupAnimals(animals) {
     // you can only write your code here!
-    let hewanA = [];
-    let hewanC = [];
-    let hewanK = [];
-    let hewanU = [];
+    animals.sort();
 
-    for (let i = 0; i < animals.length; i++){
-        let hewan = animals[i];
+    // Objek untuk menyimpan kelompok berdasarkan huruf pertama
+    let grouped = {};
 
-        if (hewan[0] === 'a'){
-            hewanA.push(hewan);
-        } if (hewan[0] === 'c'){
-            hewanC.push(hewan);
-        } if (hewan[0] === 'k'){
-            hewanK.push(hewan);
-        } if (hewan[0] === 'u') {
-            hewanU.push(hewan);
+    // Kelompokkan hewan berdasarkan huruf pertama
+    for (let animal of animals) {
+        let firstLetter = animal[0].toLowerCase();  // Ambil huruf pertama
+        if (!grouped[firstLetter]) {
+            grouped[firstLetter] = [];  // Jika huruf pertama belum ada, buat array baru
         }
-    }   
-    return [hewanA, hewanC, hewanK, hewanU]
+        grouped[firstLetter].push(animal);  // Tambahkan hewan ke grup yang sesuai
+    }
+
+    // Konversi objek ke array dua dimensi
+    let result = [];
+    for (let letter in grouped) {
+        result.push(grouped[letter]);  // Push setiap grup hewan ke dalam array hasil
+    }
+
+    return result;
 }
   
   // TEST CASES
